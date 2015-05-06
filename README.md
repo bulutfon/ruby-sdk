@@ -16,7 +16,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :bulutfon, 'api_key', 'api_secret',
            { :client_options => {ssl: { verify: false }},
                                provider_ignores_state: true,
-                           }
+                           }, scope: 'cdr, call_record'
 end
 
 OmniAuth.config.logger = Rails.logger
@@ -51,6 +51,6 @@ end
 ```
 
 ## Scopes
-
+https://github.com/bulutfon/documents/tree/master/API#endpointler
 
 ## License
