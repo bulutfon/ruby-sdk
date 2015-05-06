@@ -1,15 +1,20 @@
 # Bulutfon Ruby Sdk
 
+Bulutfon API'ye erişmek için ruby oauth2-client providerı
 
+## Rails İçin Kullanımı
 
-## Basic Usage
+Gemfile dosyasınıza aşağıdaki satırları ekleyip `bundle install` yapınız.
 
-* `gem 'omniauth'`
-* `gem 'bulutfon-sdk', git: 'git@github.com:bulutfon/ruby-sdk.git'`
-* `bundle install`
+```
+gem 'omniauth'
+gem 'bulutfon-sdk', git: 'git@github.com:bulutfon/ruby-sdk.git'
+```
+
+`config/omniauth.rb` dosyasını aşağıdaki gibi düzenleyin. Bu ayarlarda varsayılan olarak ssl kapalı ve `cdr, call_record` için yetki istenmektedir.
 
 ```ruby
-#config/omniuth.rb
+#config/omniauth.rb
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :developer unless Rails.env.production?
 
@@ -22,10 +27,14 @@ end
 OmniAuth.config.logger = Rails.logger
 ```
 
+Rails routing ayarlarını ayarlayın.
+
 ```ruby
 #config/routes.rb
 get '/auth/:provider/callback', to: 'sessions#create'
 ```
+
+Credentials token ve refresh_token'ı session'a yazalım.
 
 ```ruby
 #sessions_controller.rb
@@ -38,6 +47,8 @@ def create
     redirect_to dashboard_index_path
 end
 ```
+
+Aşağıdaki örnekle ilgili end pointlere istek yapabilirsiniz.
 
 ```ruby
 #dashboard_controller.rb
@@ -52,5 +63,3 @@ end
 
 ## Scopes
 https://github.com/bulutfon/documents/tree/master/API#endpointler
-
-## License
