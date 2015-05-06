@@ -4,34 +4,31 @@
 
 ## Basic Usage
 
-`gem 'omniauth'`
-`gem 'bulutfon-sdk'`
-`bundle install`
-
-config/omniuth.rb
+* `gem 'omniauth'`
+* `gem 'bulutfon-sdk'`
+* `bundle install`
 
 ```ruby
+#config/omniuth.rb
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :developer unless Rails.env.production?
 
   provider :bulutfon, 'api_key', 'api_secret',
            { :client_options => {ssl: { verify: false }},
                                provider_ignores_state: true,
-                           }, scope: "user,repo,gist"
+                           }, scope: 'cdr, call_record'
 end
 
 OmniAuth.config.logger = Rails.logger
 ```
 
-config/routes.rb
-
 ```ruby
+#config/routes.rb
 get '/auth/:provider/callback', to: 'sessions#create'
 ```
 
-sessions_controller.rb
-
 ```ruby
+#sessions_controller.rb
 def create
     response = request.env['omniauth.auth']
 
@@ -42,9 +39,8 @@ def create
 end
 ```
 
-dashboard_controller.rb
-
 ```ruby
+#dashboard_controller.rb
 def index
     @bulutfon = Bulutfon.new(session['access_token'], session['refresh_token'])
     @dids = @bulutfon.dids
@@ -55,6 +51,6 @@ end
 ```
 
 ## Scopes
-
+https://github.com/bulutfon/documents/tree/master/API#endpointler
 
 ## License
