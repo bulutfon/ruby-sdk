@@ -17,7 +17,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :bulutfon, 'api_key', 'api_secret',
            { :client_options => {ssl: { verify: false }},
                                provider_ignores_state: true,
-                           }
+                           }, scope: "user,repo,gist"
 end
 
 OmniAuth.config.logger = Rails.logger

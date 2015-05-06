@@ -8,8 +8,8 @@ class Bulutfon
   end
 
   %w(dids extensions groups cdrs).each do |end_point|
-    send :define_method, end_point do |page=nil|
-      page.nil? ? access(end_point) : access(end_point, {page: page})
+    send :define_method, end_point do |data={}|
+      access(end_point, data)
     end
   end
 
