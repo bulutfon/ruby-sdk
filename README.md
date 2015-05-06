@@ -5,7 +5,7 @@
 ## Basic Usage
 
 * `gem 'omniauth'`
-* `gem 'bulutfon-sdk'`
+* `gem 'bulutfon-sdk', git: 'git@github.com:bulutfon/ruby-sdk.git'`
 * `bundle install`
 
 ```ruby
