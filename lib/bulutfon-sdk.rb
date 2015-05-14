@@ -21,7 +21,10 @@ class Bulutfon
 
     data = data.merge(access_token: @access_token)
 
-    response = conn.get "/#{end_point}", data
+    puts data
+    puts "-------------------------------------------------"
+
+    response = data.key?(:id) ? conn.get("/#{end_point}/#{data[:id]}", data) : conn.get("/#{end_point}", data)
     JSON.parse(response.body)
   end
 
