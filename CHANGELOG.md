@@ -1,7 +1,9 @@
 
 #### [Current]
+ * [640bd09](../../commit/640bd09) - __(Muhammet Dilek)__ Update README.md
 
-#### 
+#### 1.0.0
+ * [1c19564](../../commit/1c19564) - __(Muhammet DİLEK)__ bump version 1.0.0
  * [f3ac4e1](../../commit/f3ac4e1) - __(Muhammet DİLEK)__ endpoint detail page
  * [2118b3a](../../commit/2118b3a) - __(Onur Özgür ÖZKAN)__ Update README.md
  * [8213532](../../commit/8213532) - __(Muhammet DİLEK)__ update readme
