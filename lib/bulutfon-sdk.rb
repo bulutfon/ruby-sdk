@@ -35,5 +35,7 @@ class Bulutfon
     end
     response = conn.post '/oauth/token', {client_id: client_id, client_secret: client_secret, access_token: access_token, refresh_token: refresh_token, grant_type: 'refresh_token', callback_url: callback_url}
     response.body
+    
   end
+
 end
