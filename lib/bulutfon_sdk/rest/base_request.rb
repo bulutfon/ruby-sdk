@@ -1,0 +1,87 @@
+module BulutfonSdk
+  module REST
+    class BaseRequest
+
+      HTTP_HEADERS = {
+          'Accept'          => 'application/json',
+          'Accept-Charset'  => 'utf-8',
+          'User-Agent'      => "bulutfon_sdk/#{BulutfonSdk::VERSION}" " (#{RUBY_ENGINE}/#{RUBY_PLATFORM}" " #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL})"
+      }
+
+      def initialize(*args)
+        options = args.last.is_a?(Hash) ? args.pop : {}
+        @config = BulutfonSdk::Util::ClientConfig.new options
+        @token = args[0] || nil
+        raise ArgumentError, 'Auth token is required' if @token.nil?
+        set_up_connection
+      end
+
+      protected
+
+      ##
+      # Prepare http request
+      # a private method documented for completeness.
+      def prepare_request(method, path, params = {})
+        request_path          = "#{@config.host}/#{path}"
+        uri                   = URI.parse(request_path)
+        params[:access_token] = @token
+        uri.query             = URI.encode_www_form(params)
+        method_class          = Net::HTTP.const_get method.to_s.capitalize
+        request               = method_class.new(uri.to_s, HTTP_HEADERS)
+        # request.form_data     = params if ['post', 'put'].include?(method)
+        connect_and_send(request)
+      end
+
+      ##
+      # Set up and cache a Net::HTTP object to use when making requests. This is
+      # a private method documented for completeness.
+      def set_up_connection # :doc:
+        uri                = URI.parse(@config.host)
+        @http              = Net::HTTP.new(uri.host, uri.port, p_user = @config.proxy_user, p_pass =  @config.proxy_pass)
+        @http.use_ssl      = true
+        @http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
+        @http.use_ssl      = @config.use_ssl
+        if @config.ssl_verify_peer
+          @http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          @http.ca_file     = @config.ssl_ca_file
+        else
+          @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        end
+        @http.open_timeout = @config.timeout
+        @http.read_timeout = @config.timeout
+      end
+
+      ##
+      # Send an HTTP request using the cached <tt>@http</tt> object and
+      # return the JSON response body parsed into a hash. Also save the raw
+      # Net::HTTP::Request and Net::HTTP::Response objects as
+      # <tt>@last_request</tt> and <tt>@last_response</tt> to allow for
+      # inspection later.
+      def connect_and_send(request) # :doc:
+        @last_request = request
+        retries_left = @config.retry_limit
+        begin
+          response = @http.request request
+          @last_response = response
+          if response.kind_of? Net::HTTPServerError
+            raise BulutfonSdk::REST::ServerError
+          end
+        rescue
+          raise if request.class == Net::HTTP::Post
+          if retries_left > 0 then retries_left -= 1; retry else raise end
+        end
+        if response.body and !response.body.empty?
+          object = MultiJson.load response.body
+        elsif response.kind_of? Net::HTTPBadRequest
+          object = { message: 'Bad request', code: 400 }
+        end
+
+        if response.kind_of? Net::HTTPClientError
+          raise BulutfonSdk::REST::RequestError.new object['message'], object['code']
+        end
+        object
+      end
+
+    end
+  end
+end
