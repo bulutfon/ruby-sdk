@@ -1,3 +1,3 @@
-module BulutfonSdk
+module BulutfonSDK
   VERSION = '0.1.0'
 end

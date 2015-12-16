@@ -1,16 +1,16 @@
-module BulutfonSdk
+module BulutfonSDK
   module REST
     class BaseRequest
 
       HTTP_HEADERS = {
           'Accept'          => 'application/json',
           'Accept-Charset'  => 'utf-8',
-          'User-Agent'      => "bulutfon_sdk/#{BulutfonSdk::VERSION}" " (#{RUBY_ENGINE}/#{RUBY_PLATFORM}" " #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL})"
+          'User-Agent'      => "bulutfon_sdk/#{BulutfonSDK::VERSION}" " (#{RUBY_ENGINE}/#{RUBY_PLATFORM}" " #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL})"
       }
 
       def initialize(*args)
         options = args.last.is_a?(Hash) ? args.pop : {}
-        @config = BulutfonSdk::Util::ClientConfig.new options
+        @config = BulutfonSDK::Util::ClientConfig.new options
         @token = args[0] || nil
         raise ArgumentError, 'Auth token is required' if @token.nil?
         set_up_connection
@@ -64,7 +64,7 @@ module BulutfonSdk
           response = @http.request request
           @last_response = response
           if response.kind_of? Net::HTTPServerError
-            raise BulutfonSdk::REST::ServerError
+            raise BulutfonSDK::REST::ServerError
           end
         rescue
           raise if request.class == Net::HTTP::Post
@@ -77,7 +77,7 @@ module BulutfonSdk
         end
 
         if response.kind_of? Net::HTTPClientError
-          raise BulutfonSdk::REST::RequestError.new object['error'], object['code']
+          raise BulutfonSDK::REST::RequestError.new object['error'], object['code']
         end
         object
       end

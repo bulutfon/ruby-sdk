@@ -5,7 +5,7 @@ require 'bulutfon_sdk/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'bulutfon_sdk'
-  spec.version       = BulutfonSdk::VERSION
+  spec.version       = BulutfonSDK::VERSION
   spec.authors       = ['Ismail Akbudak']
   spec.email         = ['ismail.akbudak@lab2023.com']
 

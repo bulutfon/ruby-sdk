@@ -1,4 +1,4 @@
-module BulutfonSdk
+module BulutfonSDK
   module REST
     class ServerError < StandardError; end
 

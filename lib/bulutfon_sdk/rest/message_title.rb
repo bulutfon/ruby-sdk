@@ -1,6 +1,6 @@
 require 'bulutfon_sdk/rest/base_request'
 
-module BulutfonSdk
+module BulutfonSDK
   module REST
     class MessageTitle < BaseRequest
 

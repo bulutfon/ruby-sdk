@@ -3,15 +3,15 @@ require 'bulutfon_sdk'
 token = 'your_token'
 
 # Account Details
-bulutfon = BulutfonSdk::REST::Bulutfon.new(token)
+bulutfon = BulutfonSDK::REST::Bulutfon.new(token)
 puts bulutfon.details
 
 # Message titles
-message_title = BulutfonSdk::REST::MessageTitle.new(token)
+message_title = BulutfonSDK::REST::MessageTitle.new(token)
 puts message_title.all
 
 # Messages
-message = BulutfonSdk::REST::Message.new(token)
+message = BulutfonSDK::REST::Message.new(token)
 puts message.all
 puts message.all({page: 1, limit: 3 })
 puts message.get(message_id)

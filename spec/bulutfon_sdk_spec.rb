@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe BulutfonSdk do
+describe BulutfonSDK do
   it 'has a version number' do
-    expect(BulutfonSdk::VERSION).not_to be nil
+    expect(BulutfonSDK::VERSION).not_to be nil
   end
 
   it 'does something useful' do

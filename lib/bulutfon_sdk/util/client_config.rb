@@ -1,4 +1,4 @@
-module BulutfonSdk
+module BulutfonSDK
   module Util
     class ClientConfig
       DEFAULTS = {
