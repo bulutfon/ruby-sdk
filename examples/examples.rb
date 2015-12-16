@@ -3,6 +3,7 @@ require 'bulutfon_sdk'
 token = 'your_token'
 
 # Account
+# -------------------------------------------------------------
 bulutfon = BulutfonSDK::REST::Bulutfon.new(token)
 # Get account details
 puts bulutfon.details
@@ -20,6 +21,7 @@ puts bulutfon.groups
 puts bulutfon.cdrs
 
 # Dids
+# -------------------------------------------------------------
 did = BulutfonSDK::REST::Did.new(token)
 # Get dids
 puts did.all
@@ -27,6 +29,7 @@ puts did.all
 puts did.get(1)
 
 # Extensions
+# -------------------------------------------------------------
 extension = BulutfonSDK::REST::Extension.new(token)
 # Get extensions
 puts extension.all
@@ -42,6 +45,7 @@ puts extension.update(1, params)
 puts extension.delete(1)
 
 # Groups
+# -------------------------------------------------------------
 group = BulutfonSDK::REST::Group.new(token)
 # Get groups
 puts group.all
@@ -49,6 +53,7 @@ puts group.all
 puts group.get(1)
 
 # Cdrs
+# -------------------------------------------------------------
 cdr = BulutfonSDK::REST::Cdr.new(token)
 # Get cdrs
 puts cdr.all
@@ -57,12 +62,20 @@ puts cdr.all({page: 1, limit: 1})
 # Get cdr with uuid
 puts cdr.get('uuid')
 
-# Message titles
+# Call Records
+# -------------------------------------------------------------
+call_record = BulutfonSDK::REST::CallRecord.new(token)
+# Get call_record download path with uuid
+puts call_record.get('uuid')
+
+# Message Titles
+# -------------------------------------------------------------
 message_title = BulutfonSDK::REST::MessageTitle.new(token)
 # Get message titles
 puts message_title.all
 
 # Messages
+# -------------------------------------------------------------
 message = BulutfonSDK::REST::Message.new(token)
 # Get messages
 puts message.all
