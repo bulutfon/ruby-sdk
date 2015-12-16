@@ -16,6 +16,8 @@ puts bulutfon.dids
 puts bulutfon.extensions
 # BulutfonSDK::REST::Group object
 puts bulutfon.groups
+# BulutfonSDK::REST::Cdr object
+puts bulutfon.cdrs
 
 # Dids
 did = BulutfonSDK::REST::Did.new(token)
@@ -45,6 +47,15 @@ group = BulutfonSDK::REST::Group.new(token)
 puts group.all
 # Get group with id
 puts group.get(1)
+
+# Cdrs
+cdr = BulutfonSDK::REST::Cdr.new(token)
+# Get cdrs
+puts cdr.all
+# Get cdrs with pagination
+puts cdr.all({page: 1, limit: 1})
+# Get cdr with uuid
+puts cdr.get('uuid')
 
 # Message titles
 message_title = BulutfonSDK::REST::MessageTitle.new(token)

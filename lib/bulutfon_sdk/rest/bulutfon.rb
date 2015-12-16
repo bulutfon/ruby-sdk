@@ -4,6 +4,7 @@ require 'bulutfon_sdk/rest/extension'
 require 'bulutfon_sdk/rest/message'
 require 'bulutfon_sdk/rest/message_title'
 require 'bulutfon_sdk/rest/group'
+require 'bulutfon_sdk/rest/cdr'
 
 module BulutfonSDK
   module REST
@@ -36,6 +37,11 @@ module BulutfonSDK
       def groups
         BulutfonSDK::REST::Group.new(@token)
       end
+
+      def cdrs
+        BulutfonSDK::REST::Cdr.new(@token)
+      end
+
     end
   end
 end
