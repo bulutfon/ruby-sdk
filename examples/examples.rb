@@ -59,7 +59,7 @@ puts extension.get(1)
 params = {full_name: 'Deneme', email: 'deneme@deneme.com', did: '905xxxxxxxxx', number: 9999, redirection_type: 'NONE', destination_type: 'EXTENSION',  destination_number: '905061189668', 'acl[]' => ['domestic', 'gsm', 'international'] }
 puts extension.create(params)
 # Update extension
-params = { 'acl[]' => ['domestic', 'gsm']  }
+params = {full_name: 'Deneme Deneme', 'acl[]' => ['domestic', 'gsm']  }
 puts extension.update(1, params)
 # Delete extension
 puts extension.delete(1)
