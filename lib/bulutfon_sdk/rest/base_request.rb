@@ -77,7 +77,7 @@ module BulutfonSdk
         end
 
         if response.kind_of? Net::HTTPClientError
-          raise BulutfonSdk::REST::RequestError.new object['message'], object['code']
+          raise BulutfonSdk::REST::RequestError.new object['error'], object['code']
         end
         object
       end
