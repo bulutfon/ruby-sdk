@@ -2,11 +2,15 @@ require 'bulutfon_sdk/rest/base_request'
 
 module BulutfonSDK
   module REST
-    class CallRecord < BaseRequest
+    class IncomingFax < BaseRequest
 
         def initialize(*args)
           super(*args)
-          @resource = 'call-records'
+          @resource = 'incoming-faxes'
+        end
+
+        def all( params = {} )
+          prepare_request( 'get', @resource, params)
         end
 
         def get( uuid )

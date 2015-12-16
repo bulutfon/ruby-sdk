@@ -19,6 +19,8 @@ puts bulutfon.extensions
 puts bulutfon.groups
 # BulutfonSDK::REST::Cdr object
 puts bulutfon.cdrs
+# BulutfonSDK::REST::IncomingFax object
+puts bulutfon.incoming_faxes
 
 # Dids
 # -------------------------------------------------------------
@@ -67,6 +69,12 @@ puts cdr.get('uuid')
 call_record = BulutfonSDK::REST::CallRecord.new(token)
 # Get call_record download path with uuid
 puts call_record.get('uuid')
+
+# Incoming Faxes
+# -------------------------------------------------------------
+incoming_fax = BulutfonSDK::REST::IncomingFax.new(token)
+puts incoming_fax.all
+puts incoming_fax.get('70e9a6b1-bf67-4806-a25b-72d705388c19')
 
 # Message Titles
 # -------------------------------------------------------------

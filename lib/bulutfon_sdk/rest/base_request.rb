@@ -19,8 +19,17 @@ module BulutfonSDK
       protected
 
       ##
+      # Prepare URI object for file path
+      def prepare_uri(path, params = {})
+        request_path          = "#{@config.host}/#{path}"
+        uri                   = URI.parse(request_path)
+        params[:access_token] = @token
+        uri.query             = URI.encode_www_form(params)
+        uri
+      end
+
+      ##
       # Prepare http request
-      # a private method documented for completeness.
       def prepare_request(method, path, params = {})
         request_path          = "#{@config.host}/#{path}"
         uri                   = URI.parse(request_path)
@@ -33,8 +42,7 @@ module BulutfonSDK
       end
 
       ##
-      # Set up and cache a Net::HTTP object to use when making requests. This is
-      # a private method documented for completeness.
+      # Set up and cache a Net::HTTP object to use when making requests.
       def set_up_connection # :doc:
         uri                = URI.parse(@config.host)
         @http              = Net::HTTP.new(uri.host, uri.port, p_user = @config.proxy_user, p_pass =  @config.proxy_pass)

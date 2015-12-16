@@ -5,6 +5,7 @@ require 'bulutfon_sdk/rest/message'
 require 'bulutfon_sdk/rest/message_title'
 require 'bulutfon_sdk/rest/group'
 require 'bulutfon_sdk/rest/cdr'
+require 'bulutfon_sdk/rest/incoming_fax'
 
 module BulutfonSDK
   module REST
@@ -40,6 +41,10 @@ module BulutfonSDK
 
       def cdrs
         BulutfonSDK::REST::Cdr.new(@token)
+      end
+
+      def incoming_faxes
+        BulutfonSDK::REST::IncomingFax.new(@token)
       end
 
     end
