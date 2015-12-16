@@ -15,3 +15,4 @@ Gemfile.lock
 *.gem
 bin
 docs/_build
+.DS_Store
