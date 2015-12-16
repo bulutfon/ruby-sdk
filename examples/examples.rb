@@ -21,6 +21,8 @@ puts bulutfon.groups
 puts bulutfon.cdrs
 # BulutfonSDK::REST::IncomingFax object
 puts bulutfon.incoming_faxes
+# BulutfonSDK::REST::OutgoingFax object
+puts bulutfon.outgoing_faxes
 
 # Dids
 # -------------------------------------------------------------
@@ -73,8 +75,22 @@ puts call_record.get('uuid')
 # Incoming Faxes
 # -------------------------------------------------------------
 incoming_fax = BulutfonSDK::REST::IncomingFax.new(token)
+# Get incoming faxes
 puts incoming_fax.all
-puts incoming_fax.get('70e9a6b1-bf67-4806-a25b-72d705388c19')
+# Get incoming fax with id
+puts incoming_fax.get('uuid')
+
+# Outgoing Faxes
+# -------------------------------------------------------------
+outgoing_fax = BulutfonSDK::REST::OutgoingFax.new(token)
+# Get outgoing faxes
+puts outgoing_fax.all
+# Get outgoing fax with id
+puts outgoing_fax.get('uuid')
+# Create outgoing faxes
+file = "#{File.expand_path(File.dirname(__FILE__))}/deneme.pdf"
+params = {title: 'Deneme', receivers: '905xxxxxxxxx', did: '905xxxxxxxxx', attachment: file }
+puts outgoing_fax.create(params)
 
 # Message Titles
 # -------------------------------------------------------------
