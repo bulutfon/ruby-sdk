@@ -2,7 +2,7 @@ require 'bulutfon_sdk'
 
 token = 'your_token'
 
-# Account Details
+# Account
 bulutfon = BulutfonSDK::REST::Bulutfon.new(token)
 # Get account details
 puts bulutfon.details
@@ -14,15 +14,37 @@ puts bulutfon.message_titles
 puts bulutfon.dids
 # BulutfonSDK::REST::Extension object
 puts bulutfon.extensions
+# BulutfonSDK::REST::Group object
+puts bulutfon.groups
 
 # Dids
 did = BulutfonSDK::REST::Did.new(token)
 # Get dids
 puts did.all
-# Get dids with pagination
-puts did.all({page: 1, limit: 1})
 # Get did with id
 puts did.get(1)
+
+# Extensions
+extension = BulutfonSDK::REST::Extension.new(token)
+# Get extensions
+puts extension.all
+# Get extension with id
+puts extension.get(1)
+# Create extension
+params = {full_name: 'Deneme', email: 'deneme@deneme.com', did: '905xxxxxxxxx', number: 9999, redirection_type: 'NONE', destination_type: 'EXTENSION',  destination_number: '905061189668', 'acl[]' => ['domestic', 'gsm', 'international'] }
+puts extension.create(params)
+# Update extension
+params = {full_name: 'Deneme Deneme', 'acl[]' => ['domestic', 'gsm']  }
+puts extension.update(1, params)
+# Delete extension
+puts extension.delete(1)
+
+# Groups
+group = BulutfonSDK::REST::Group.new(token)
+# Get groups
+puts group.all
+# Get group with id
+puts group.get(1)
 
 # Message titles
 message_title = BulutfonSDK::REST::MessageTitle.new(token)
@@ -47,19 +69,3 @@ puts message.create(params_multiple)
 params = {title: 'CONFIRMED_MESSAGE_TITLE', content: 'Planned message example', receivers: '905xxxxxxxxx', is_future_sms: true, send_date: '16/12/2015 10:00'}
 puts message.create(params)
 
-# Extensions
-extension = BulutfonSDK::REST::Extension.new(token)
-# Get extensions
-puts extension.all
-# Get extensions
-puts extension.all({page: 1, limit: 1})
-# Get extension with id
-puts extension.get(1)
-# Create extension
-params = {full_name: 'Deneme', email: 'deneme@deneme.com', did: '905xxxxxxxxx', number: 9999, redirection_type: 'NONE', destination_type: 'EXTENSION',  destination_number: '905061189668', 'acl[]' => ['domestic', 'gsm', 'international'] }
-puts extension.create(params)
-# Update extension
-params = {full_name: 'Deneme Deneme', 'acl[]' => ['domestic', 'gsm']  }
-puts extension.update(1, params)
-# Delete extension
-puts extension.delete(1)

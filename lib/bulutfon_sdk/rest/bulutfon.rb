@@ -3,6 +3,7 @@ require 'bulutfon_sdk/rest/did'
 require 'bulutfon_sdk/rest/extension'
 require 'bulutfon_sdk/rest/message'
 require 'bulutfon_sdk/rest/message_title'
+require 'bulutfon_sdk/rest/group'
 
 module BulutfonSDK
   module REST
@@ -30,6 +31,10 @@ module BulutfonSDK
 
       def dids
         BulutfonSDK::REST::Did.new(@token)
+      end
+
+      def groups
+        BulutfonSDK::REST::Group.new(@token)
       end
     end
   end
