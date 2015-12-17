@@ -48,6 +48,9 @@ module BulutfonSDK
         BulutfonSDK::REST::Announcement.new(@token)
       end
 
+      def automatic_calls
+        BulutfonSDK::REST::AutomaticCall.new(@token)
+      end
     end
   end
 end

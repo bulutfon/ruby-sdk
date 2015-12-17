@@ -25,6 +25,8 @@ puts bulutfon.incoming_faxes
 puts bulutfon.outgoing_faxes
 # BulutfonSDK::REST::Announcement object
 puts bulutfon.announcements
+# BulutfonSDK::REST::AutomaticCall object
+puts bulutfon.automatic_calls
 
 # Dids
 # -------------------------------------------------------------
@@ -42,10 +44,22 @@ puts extension.all
 # Get extension with id
 puts extension.get(1)
 # Create extension
-params = {full_name: 'Deneme', email: 'deneme@deneme.com', did: '905xxxxxxxxx', number: 9999, redirection_type: 'NONE', destination_type: 'EXTENSION',  destination_number: '905061189668', 'acl[]' => ['domestic', 'gsm', 'international'] }
+params = {
+    full_name: 'Deneme',
+    email: 'deneme@deneme.com',
+    did: '905xxxxxxxxx',
+    number: 9999,
+    redirection_type: 'NONE',
+    destination_type: 'EXTENSION',
+    destination_number: '905061189668',
+    'acl[]' => [ 'domestic', 'gsm', 'international']
+}
 puts extension.create(params)
 # Update extension
-params = {full_name: 'Deneme Deneme', 'acl[]' => ['domestic', 'gsm']  }
+params = {
+    full_name: 'Deneme Deneme',
+    'acl[]' => [ 'domestic', 'gsm']
+}
 puts extension.update(1, params)
 # Delete extension
 puts extension.delete(1)
@@ -91,7 +105,11 @@ puts outgoing_fax.all
 puts outgoing_fax.get('uuid')
 # Create outgoing faxes
 file = "#{File.expand_path(File.dirname(__FILE__))}/deneme.pdf"
-params = {title: 'Deneme', receivers: '905xxxxxxxxx', did: '905xxxxxxxxx', attachment: file }
+params = {
+    title: 'Deneme',
+    receivers: '905xxxxxxxxx',
+    did: '905xxxxxxxxx', attachment: file
+}
 puts outgoing_fax.create(params)
 
 # Announcements
@@ -101,6 +119,40 @@ announcement = BulutfonSDK::REST::Announcement.new(token)
 puts announcement.all
 # Get announcement with id
 puts announcement.get(1)
+
+# Automatic Calls
+# -------------------------------------------------------------
+automatic_call = BulutfonSDK::REST::AutomaticCall.new(token)
+# Get automatic calls
+puts automatic_call.all
+# Get automatic call with id
+puts automatic_call.get(1)
+# Create automatic call, after creation receivers will call
+params = {
+    title: 'Automatic call after creation',
+    receivers: '905xxxxxxxxx',
+    did: '905xxxxxxxxx',
+    announcement_id: 1
+}
+puts automatic_call.create(params)
+# Create time planned automatic call, in this params receivers will be calling on thursday between 10:15, 12:00
+params = {
+    title: 'Time planned call',
+    receivers: '905xxxxxxxxx',
+    did: '905xxxxxxxxx',
+    announcement_id: 1,
+    mon_active: false,
+    tue_active: false,
+    wed_active: false,
+    thu_active: true,
+    thu_start: '10:15',
+    thu_finish: '12:00',
+    fri_active: false,
+    sat_active: false,
+    sun_active: false,
+    hours_active: true
+}
+puts automatic_call.create(params)
 
 # Message Titles
 # -------------------------------------------------------------
@@ -118,12 +170,26 @@ puts message.all({page: 1, limit: 3 })
 # Get message with id
 puts message.get(1)
 # Create message
-params = {title: 'CONFIRMED_MESSAGE_TITLE', content: 'Test Message', receivers: '905xxxxxxxxx'}
+params = {
+    title: 'CONFIRMED_MESSAGE_TITLE',
+    content: 'Test Message',
+    receivers: '905xxxxxxxxx'
+}
 puts message.create(params)
 # Create message for multiple receiver
-params_multiple = {title: 'CONFIRMED_MESSAGE_TITLE', content: 'Multiple Message', receivers: '905xxxxxxxxx,905xxxxxxxxx'}
+params_multiple = {
+    title: 'CONFIRMED_MESSAGE_TITLE',
+    content: 'Multiple Message',
+    receivers: '905xxxxxxxxx,905xxxxxxxxx'
+}
 puts message.create(params_multiple)
-# Create planned message
-params = {title: 'CONFIRMED_MESSAGE_TITLE', content: 'Planned message example', receivers: '905xxxxxxxxx', is_future_sms: true, send_date: '16/12/2015 10:00'}
+# Create time planned message
+params = {
+    title: 'CONFIRMED_MESSAGE_TITLE',
+    content: 'Planned message example',
+    receivers: '905xxxxxxxxx',
+    is_future_sms: true,
+    send_date: '16/12/2015 10:00'
+}
 puts message.create(params)
 
