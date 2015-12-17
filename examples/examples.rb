@@ -51,7 +51,7 @@ params = {
     number: 9999,
     redirection_type: 'NONE',
     destination_type: 'EXTENSION',
-    destination_number: '905061189668',
+    destination_number: '905xxxxxxxxx',
     'acl[]' => [ 'domestic', 'gsm', 'international']
 }
 puts extension.create(params)
