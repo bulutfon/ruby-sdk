@@ -5,14 +5,13 @@
 
 ## Kullanım
 
-### Master Token ile
+### Kurulum
 
 Gemfile dosyanıza şu satırı ekleyiniz
 
 ```  ruby
 gem 'bulutfon_sdk', '~> 1.0.0'
 ```
-
 	
 Bu satırı ekledikten sonra,
 
@@ -20,6 +19,8 @@ Bu satırı ekledikten sonra,
 bundle install
 ```
 komutunu koşarak gerekli paketleri yükledikten sonra BulutfonSDK'yı kullanmaya başlayabilirsiniz.
+
+### Master Token ile
 
 ```ruby
 require 'bulutfon_sdk'
