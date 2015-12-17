@@ -13,8 +13,8 @@ module BulutfonSDK
           prepare_request( 'get', @resource,params)
         end
 
-        def get( uuid )
-          uri = prepare_uri("#{@resource}/#{uuid}")
+        def get( id )
+          uri = prepare_uri("#{@resource}/#{id}")
           { download_path: uri.to_s }
         end
 
