@@ -18,6 +18,10 @@ module BulutfonSDK
         { download_path: uri.to_s }
       end
 
+      def save( uuid, save_path)
+        save_file( 'get', "#{@resource}/#{uuid}", save_path)
+      end
+
     end
   end
 end

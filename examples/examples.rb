@@ -95,6 +95,9 @@ incoming_fax = BulutfonSDK::REST::IncomingFax.new(token)
 puts incoming_fax.all
 # Get incoming fax with uuid
 puts incoming_fax.get('uuid')
+# Save incoming fax with uuid
+save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.tiff"
+puts incoming_fax.save('uuid', save_path)
 
 # Outgoing Faxes
 # -------------------------------------------------------------
