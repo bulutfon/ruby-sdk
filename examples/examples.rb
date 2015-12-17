@@ -87,6 +87,9 @@ puts cdr.get('uuid')
 call_record = BulutfonSDK::REST::CallRecord.new(token)
 # Get call_record download path with uuid
 puts call_record.get('uuid')
+# Save call record
+save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.ogg"
+puts call_record.save('uuid', save_path)
 
 # Incoming Faxes
 # -------------------------------------------------------------
