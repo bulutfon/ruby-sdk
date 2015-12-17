@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ismail Akbudak']
   spec.email         = ['ismail.akbudak@lab2023.com']
 
-  spec.summary          = %q{Write a short summary, because Rubygems requires one.}
-  spec.description      = %q{Write a longer description or delete this line.}
+  spec.summary          = %q{Bulutfon Ruby SDK.}
+  spec.description      = %q{Bulutfon Ruby SDK.}
   spec.homepage         = 'https://github.com/bulutfon/ruby-sdk'
   spec.extra_rdoc_files = ['README.md', 'LICENSE.md']
 
