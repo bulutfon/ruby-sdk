@@ -4,14 +4,14 @@ module BulutfonSDK
   module REST
     class MessageTitle < BaseRequest
 
-        def initialize(*args)
-          super(*args)
-          @resource = 'message-titles'
-        end
+      def initialize(*args)
+        super(*args)
+        @resource = 'message-titles'
+      end
 
-        def all( params = {} )
-          prepare_request( 'get', @resource,params)
-        end
+      def all( params = {} )
+        prepare_request( 'get', @resource,params)
+      end
 
     end
   end

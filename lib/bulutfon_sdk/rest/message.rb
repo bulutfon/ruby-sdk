@@ -4,22 +4,22 @@ module BulutfonSDK
   module REST
     class Message < BaseRequest
 
-        def initialize(*args)
-          super(*args)
-          @resource = 'messages'
-        end
+      def initialize(*args)
+        super(*args)
+        @resource = 'messages'
+      end
 
-        def all( params = {} )
-          prepare_request( 'get', @resource,params)
-        end
+      def all( params = {} )
+        prepare_request( 'get', @resource,params)
+      end
 
-        def get( id )
-          prepare_request( 'get', "#{@resource}/#{id}")
-        end
+      def get( id )
+        prepare_request( 'get', "#{@resource}/#{id}")
+      end
 
-        def create(params)
-          prepare_request( 'post', @resource, params)
-        end
+      def create(params)
+        prepare_request( 'post', @resource, params)
+      end
 
     end
   end

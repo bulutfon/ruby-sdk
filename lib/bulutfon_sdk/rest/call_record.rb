@@ -4,15 +4,15 @@ module BulutfonSDK
   module REST
     class CallRecord < BaseRequest
 
-        def initialize(*args)
-          super(*args)
-          @resource = 'call-records'
-        end
+      def initialize(*args)
+        super(*args)
+        @resource = 'call-records'
+      end
 
-        def get( uuid )
-          uri = prepare_uri("#{@resource}/#{uuid}")
-          { download_path: uri.to_s }
-        end
+      def get( uuid )
+        uri = prepare_uri("#{@resource}/#{uuid}")
+        { download_path: uri.to_s }
+      end
 
     end
   end

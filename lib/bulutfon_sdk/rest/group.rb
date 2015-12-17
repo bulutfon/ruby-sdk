@@ -4,18 +4,18 @@ module BulutfonSDK
   module REST
     class Group < BaseRequest
 
-        def initialize(*args)
-          super(*args)
-          @resource = 'groups'
-        end
+      def initialize(*args)
+        super(*args)
+        @resource = 'groups'
+      end
 
-        def all( params = {} )
-          prepare_request( 'get', @resource,params)
-        end
+      def all( params = {} )
+        prepare_request( 'get', @resource,params)
+      end
 
-        def get( id )
-          prepare_request( 'get', "#{@resource}/#{id}")
-        end
+      def get( id )
+        prepare_request( 'get', "#{@resource}/#{id}")
+      end
 
     end
   end

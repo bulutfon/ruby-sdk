@@ -4,18 +4,18 @@ module BulutfonSDK
   module REST
     class Did < BaseRequest
 
-        def initialize(*args)
-          super(*args)
-          @resource = 'dids'
-        end
+      def initialize(*args)
+        super(*args)
+        @resource = 'dids'
+      end
 
-        def all( params = {} )
-          prepare_request( 'get', @resource,params)
-        end
+      def all( params = {} )
+        prepare_request( 'get', @resource,params)
+      end
 
-        def get( id )
-          prepare_request( 'get', "#{@resource}/#{id}")
-        end
+      def get( id )
+        prepare_request( 'get', "#{@resource}/#{id}")
+      end
 
     end
   end
