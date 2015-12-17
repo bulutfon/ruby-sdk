@@ -36,6 +36,10 @@ module BulutfonSDK
         BulutfonSDK::REST::Cdr.new(@token)
       end
 
+      def call_records
+        BulutfonSDK::REST::CallRecord.new(@token)
+      end
+
       def incoming_faxes
         BulutfonSDK::REST::IncomingFax.new(@token)
       end
@@ -51,6 +55,7 @@ module BulutfonSDK
       def automatic_calls
         BulutfonSDK::REST::AutomaticCall.new(@token)
       end
+
     end
   end
 end

@@ -19,6 +19,8 @@ puts bulutfon.extensions
 puts bulutfon.groups
 # BulutfonSDK::REST::Cdr object
 puts bulutfon.cdrs
+# BulutfonSDK::REST::CallRecord object
+puts bulutfon.call_records
 # BulutfonSDK::REST::IncomingFax object
 puts bulutfon.incoming_faxes
 # BulutfonSDK::REST::OutgoingFax object
@@ -85,7 +87,7 @@ puts cdr.get('uuid')
 # Call Records
 # -------------------------------------------------------------
 call_record = BulutfonSDK::REST::CallRecord.new(token)
-# Get call_record download path with uuid
+# Get call_record detail with uuid
 puts call_record.get('uuid')
 # Save call record to save_path with uuid
 save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.ogg"
@@ -114,7 +116,8 @@ file = "#{File.expand_path(File.dirname(__FILE__))}/pdf-sample.pdf"
 params = {
     title: 'Deneme',
     receivers: '905xxxxxxxxx',
-    did: '905xxxxxxxxx', attachment: file
+    did: '905xxxxxxxxx',
+    attachment: file
 }
 puts outgoing_fax.create(params)
 

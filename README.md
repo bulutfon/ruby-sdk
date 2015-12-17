@@ -47,8 +47,10 @@ methodunu kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.dids.all     # Santral listesine erişir
-puts bulutfon.dids.get(1)  # Id'si verilen santral detayını döndürür 
+# Santral listesine erişir
+puts bulutfon.dids.all    
+# Id'si verilen santral detayını döndürür
+puts bulutfon.dids.get(1)  
 ```
 
 methodlarını kullanabilirsiniz.
@@ -58,8 +60,11 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.extensions.all     # Dahili listesine erişir
-puts bulutfon.extensions.get(1)  # Id'si verilen dahili detayını döndürür
+# Dahili listesine erişir
+puts bulutfon.extensions.all     
+# Id'si verilen dahili detayını döndürür
+puts bulutfon.extensions.get(1)  
+# Verilen parametrelere göre yeni dahili oluşturur.
 params = {
     full_name: 'Deneme',
     email: 'deneme@deneme.com',
@@ -70,9 +75,15 @@ params = {
     destination_number: '905xxxxxxxxx',
     'acl[]' => [ 'domestic', 'gsm', 'international']
 }
-puts bulutfon.extensions.create(params)     # Verilen parametrelere göre yeni dahili oluşturur.
-puts bulutfon.extensions.update(1, params)  # Verilen parametrelere göre dahiliyi günceller
-puts bulutfon.extensions.delete(1)          # Dahiliyi siler    
+puts bulutfon.extensions.create(params)    
+# Verilen parametrelere göre dahiliyi günceller
+params = {
+    full_name: 'Deneme Deneme',
+    'acl[]' => [ 'domestic', 'gsm']
+}
+puts bulutfon.extensions.update(1, params)  
+# Dahiliyi siler
+puts bulutfon.extensions.delete(1)              
 ```
 
 methodlarını kullanabilirsiniz.
@@ -82,8 +93,10 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.groups.all     # Grup listesine erişir
-puts bulutfon.groups.get(1)  # Id'si verilen grup detayını döndürür 
+# Grup listesine erişir
+puts bulutfon.groups.all     
+# Id'si verilen grup detayını döndürür 
+puts bulutfon.groups.get(1)  
 ```
 
 methodlarını kullanabilirsiniz.
@@ -93,9 +106,17 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.cdrs.all                      # Cdr listesine erişir
-puts bulutfon.cdrs.all({page: 1, limit: 3}) # Cdr listesine sayfalama yaparak erişir
-puts bulutfon.cdrs.get('uuid')              # Uuid'si verilen cdr detayını döndürür 
+# Cdr listesine erişir
+puts bulutfon.cdrs.all                      
+# Cdr listesine sayfalama yaparak erişir
+puts bulutfon.cdrs.all({page: 1, limit: 3}) 
+# Uuid'si verilen cdr detayını döndürür 
+puts bulutfon.cdrs.get('uuid')              
+# Uuid'si verilen arama kaydinin detaylarini getir 
+puts bulutfon.call_records.get('uuid')         
+# Uuid'si verilen ses kaydını indir
+save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.ogg"
+puts bulutfon.call_records.save('uuid', save_path)
 ```
 
 methodlarını kullanabilirsiniz.
@@ -105,7 +126,13 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.incoming_faxes.all # Gelen faksları listeler 
+# Gelen faksları listeler
+puts bulutfon.incoming_faxes.all  
+# Uuid'si verilen gelen faksın detayları
+puts  bulutfon.incoming_faxes.get('uuid')
+# Uuid'si verilen gelen faksı indir
+save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.tiff"
+puts  bulutfon.incoming_faxes.save('uuid', save_path)
 ```
 
 methodlarını kullanabilirsiniz.
@@ -115,7 +142,19 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.outgoing_faxes.all # Giden faksları listeler 
+# Giden faksları listeler 
+puts bulutfon.outgoing_faxes.all
+# Id'si verilen giden faks detayları
+puts bulutfon.outgoing_faxes.get(1)
+# Faks gönderme işlemi
+file = "#{File.expand_path(File.dirname(__FILE__))}/pdf-sample.pdf"
+params = {
+    title: 'Deneme',
+    receivers: '905xxxxxxxxx',
+    did: '905xxxxxxxxx', 
+    attachment: file
+}
+puts bulutfon.outgoing_faxes.create(params)
 ```
 
 methodlarını kullanabilirsiniz.
@@ -125,7 +164,22 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.announcements.all # Ses Dosyalarını listeler 
+# Ses Dosyalarını listeler 
+puts bulutfon.announcements.all 
+# Id'si verilen ses dosyasının detayları
+puts bulutfon.announcements.get(1)
+# Ses dosyası oluşturma
+file = "#{File.expand_path(File.dirname(__FILE__))}/test.wav"
+params = {
+    name: 'Deneme',
+    announcement: file
+}
+puts bulutfon.announcements.create(params)
+# Id'si verilen ses dosyasını indirme işlemi
+save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_test.wav"
+puts bulutfon.announcements.save(1, save_path)
+# Id'si verilen ses dosyasını silme
+puts bulutfon.announcements.delete(1)
 ```
 
 methodlarını kullanabilirsiniz.
@@ -145,7 +199,8 @@ params = {
     announcement_id: 1
 }
 puts bulutfon.automatic_calls.create(params)
-# Zaman planlı automatic call oluşturulur ve oluşturmadan sonra receivers numaraları perşembe günü saat 10:15 ile 12:00 arasında aranır
+# Zaman planlı automatic call oluşturulur ve oluşturmadan sonra receivers numaraları 
+# perşembe günü saat 10:15 ile 12:00 arasında aranır
 params = {
     title: 'Time planned call',
     receivers: '905xxxxxxxxx',
@@ -172,7 +227,8 @@ methodlarını kullanabilirsiniz.
 Bunun için;
 
 ```ruby
-puts bulutfon.message_titles.all # Panelden oluşturduğunuz sms başlıklarını listeler
+# Panelden oluşturduğunuz sms başlıklarını listeler
+puts bulutfon.message_titles.all 
 ```
 
 methodlarını kullanabilirsiniz.
