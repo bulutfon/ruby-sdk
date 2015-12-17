@@ -31,8 +31,7 @@ module BulutfonSDK
         basename      = File.basename file
         type          = file_content_type file
         content       = File.read(file)
-        base_64_data  = Base64.encode64(content)
-        base_64_data.gsub!("\n", '')
+        base_64_data  = Base64.strict_encode64(content)
         params[:attachment] = "data:#{type};name:#{basename};base64:#{base_64_data}"
       end
 
