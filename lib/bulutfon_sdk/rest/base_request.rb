@@ -42,6 +42,24 @@ module BulutfonSDK
       end
 
       ##
+      # Prepare http request for file saving
+      def save_file(method, path, save_path)
+        uri          = prepare_uri(path)
+        method_class = Net::HTTP.const_get method.to_s.capitalize
+        request      = method_class.new(uri.to_s, HTTP_HEADERS)
+        response     = connect_and_send(request, is_file: true )
+        begin
+          file = File.open(save_path, 'w')
+          file.write(response)
+        rescue => error
+          raise BulutfonSDK::REST::SDKError.new error
+        ensure
+          file.close unless file.nil?
+        end
+        { file: file, save_path: save_path }
+      end
+
+      ##
       # Set up and cache a Net::HTTP object to use when making requests.
       def set_up_connection # :doc:
         uri                = URI.parse(@config.host)
@@ -65,7 +83,7 @@ module BulutfonSDK
       # Net::HTTP::Request and Net::HTTP::Response objects as
       # <tt>@last_request</tt> and <tt>@last_response</tt> to allow for
       # inspection later.
-      def connect_and_send(request) # :doc:
+      def connect_and_send(request, is_file = false ) # :doc:
         @last_request = request
         retries_left = @config.retry_limit
         begin
@@ -79,7 +97,11 @@ module BulutfonSDK
           if retries_left > 0 then retries_left -= 1; retry else raise end
         end
         if response.body and !response.body.empty?
-          object = MultiJson.load response.body
+          if is_file
+            object = response.body
+          else
+            object = MultiJson.load response.body
+          end
         elsif response.kind_of? Net::HTTPBadRequest
           object = { message: 'Bad request', code: 400 }
         end

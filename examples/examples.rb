@@ -104,7 +104,7 @@ puts outgoing_fax.all
 # Get outgoing fax with id
 puts outgoing_fax.get(1)
 # Create outgoing faxes
-file = "#{File.expand_path(File.dirname(__FILE__))}/deneme.pdf"
+file = "#{File.expand_path(File.dirname(__FILE__))}/pdf-sample.pdf"
 params = {
     title: 'Deneme',
     receivers: '905xxxxxxxxx',
@@ -119,6 +119,18 @@ announcement = BulutfonSDK::REST::Announcement.new(token)
 puts announcement.all
 # Get announcement with id
 puts announcement.get(1)
+# Create announcement
+file = "#{File.expand_path(File.dirname(__FILE__))}/test.wav"
+params = {
+    name: 'Deneme',
+    announcement: file
+}
+puts announcement.create(params)
+# Save announcement that is id equal 1, wav file
+save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_test.wav"
+puts announcement.save(1, save_path)
+# Delete announcement with id
+puts announcement.delete(1)
 
 # Automatic Calls
 # -------------------------------------------------------------
