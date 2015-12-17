@@ -87,7 +87,7 @@ puts cdr.get('uuid')
 call_record = BulutfonSDK::REST::CallRecord.new(token)
 # Get call_record download path with uuid
 puts call_record.get('uuid')
-# Save call record
+# Save call record to save_path with uuid
 save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.ogg"
 puts call_record.save('uuid', save_path)
 
@@ -98,7 +98,7 @@ incoming_fax = BulutfonSDK::REST::IncomingFax.new(token)
 puts incoming_fax.all
 # Get incoming fax with uuid
 puts incoming_fax.get('uuid')
-# Save incoming fax with uuid
+# Save incoming fax to save_path with uuid
 save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_uuid.tiff"
 puts incoming_fax.save('uuid', save_path)
 
@@ -132,7 +132,7 @@ params = {
     announcement: file
 }
 puts announcement.create(params)
-# Save announcement that is id equal 1, wav file
+# Save announcement file to save_path with id
 save_path = "#{File.expand_path(File.dirname(__FILE__))}/save_test.wav"
 puts announcement.save(1, save_path)
 # Delete announcement with id
