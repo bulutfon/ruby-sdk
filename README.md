@@ -273,3 +273,7 @@ methodlarını kullanabilirsiniz.
 
 Örnek kullanımları görmek için ve erişebileceğiniz değişkenler için [örnek kodlarımızı](https://github.com/bulutfon/ruby-sdk/tree/master/examples) inceleyebilirsiniz.
     
+##Credits
+* ruby_sdk is maintained by [Lab2023](http://lab2023.com/) & [Bulutfon](https://www.bulutfon.com/)
+* Thank you to all the contributors!
+* The names and logos for Bulutfon are trademarks of Bulutfon
