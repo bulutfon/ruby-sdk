@@ -15,8 +15,8 @@ module BulutfonSDK
         prepare_request( 'get', @resource, params)
       end
 
-      def get( uuid )
-        prepare_request( 'get', "#{@resource}/#{uuid}")
+      def get( id )
+        prepare_request( 'get', "#{@resource}/#{id}")
       end
 
       def create(params)

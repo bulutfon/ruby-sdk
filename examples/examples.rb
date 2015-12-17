@@ -93,7 +93,7 @@ puts call_record.get('uuid')
 incoming_fax = BulutfonSDK::REST::IncomingFax.new(token)
 # Get incoming faxes
 puts incoming_fax.all
-# Get incoming fax with id
+# Get incoming fax with uuid
 puts incoming_fax.get('uuid')
 
 # Outgoing Faxes
@@ -102,7 +102,7 @@ outgoing_fax = BulutfonSDK::REST::OutgoingFax.new(token)
 # Get outgoing faxes
 puts outgoing_fax.all
 # Get outgoing fax with id
-puts outgoing_fax.get('uuid')
+puts outgoing_fax.get(1)
 # Create outgoing faxes
 file = "#{File.expand_path(File.dirname(__FILE__))}/deneme.pdf"
 params = {
