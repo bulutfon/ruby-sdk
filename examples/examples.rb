@@ -23,6 +23,8 @@ puts bulutfon.cdrs
 puts bulutfon.incoming_faxes
 # BulutfonSDK::REST::OutgoingFax object
 puts bulutfon.outgoing_faxes
+# BulutfonSDK::REST::Announcement object
+puts bulutfon.announcements
 
 # Dids
 # -------------------------------------------------------------
@@ -91,6 +93,14 @@ puts outgoing_fax.get('uuid')
 file = "#{File.expand_path(File.dirname(__FILE__))}/deneme.pdf"
 params = {title: 'Deneme', receivers: '905xxxxxxxxx', did: '905xxxxxxxxx', attachment: file }
 puts outgoing_fax.create(params)
+
+# Announcements
+# -------------------------------------------------------------
+announcement = BulutfonSDK::REST::Announcement.new(token)
+# Get announcements
+puts announcement.all
+# Get announcement with id
+puts announcement.get(1)
 
 # Message Titles
 # -------------------------------------------------------------

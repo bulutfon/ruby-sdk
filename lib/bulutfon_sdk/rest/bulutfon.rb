@@ -1,12 +1,4 @@
 require 'bulutfon_sdk/rest/base_request'
-require 'bulutfon_sdk/rest/did'
-require 'bulutfon_sdk/rest/extension'
-require 'bulutfon_sdk/rest/message'
-require 'bulutfon_sdk/rest/message_title'
-require 'bulutfon_sdk/rest/group'
-require 'bulutfon_sdk/rest/cdr'
-require 'bulutfon_sdk/rest/incoming_fax'
-require 'bulutfon_sdk/rest/outgoing_fax'
 
 module BulutfonSDK
   module REST
@@ -50,6 +42,10 @@ module BulutfonSDK
 
       def outgoing_faxes
         BulutfonSDK::REST::OutgoingFax.new(@token)
+      end
+
+      def announcements
+        BulutfonSDK::REST::Announcement.new(@token)
       end
 
     end
