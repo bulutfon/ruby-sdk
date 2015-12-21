@@ -10,7 +10,7 @@
 Gemfile dosyanıza şu satırı ekleyiniz
 
 ```  ruby
-gem 'bulutfon_sdk', '~> 1.0.0'
+gem 'bulutfon_sdk'
 ```
 	
 Bu satırı ekledikten sonra,
