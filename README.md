@@ -1,5 +1,7 @@
 # Bulutfon Ruby SDK
 
+[![Gem Version](https://badge.fury.io/rb/bulutfon_sdk.svg)](https://badge.fury.io/rb/bulutfon_sdk)
+
 * [API Dokümantasyonu](https://github.com/bulutfon/documents/tree/master/API)
 * [Örnek Kodlar](https://github.com/bulutfon/ruby-sdk/tree/master/examples)
 
