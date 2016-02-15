@@ -20,24 +20,29 @@ module BulutfonSDK
         ##
         # Prepare URI object for file path
         def prepare_uri(path, params = {})
-          request_path          = "#{@config.host}/#{path}"
-          uri                   = URI.parse(request_path)
-          params[:access_token] = @token
-          uri.query             = URI.encode_www_form(params)
+          uri       = uri_parse(params, path)
+          uri.query = URI.encode_www_form(params)
           uri
         end
 
         ##
         # Prepare http request
         def prepare_request(method, path, params = {})
-          request_path          = "#{@config.host}/#{path}"
-          uri                   = URI.parse(request_path)
-          params[:access_token] = @token
+          uri                   = uri_parse(params, path)
           uri.query             = URI.encode_www_form(params) if ['get', 'delete'].include?(method)
           method_class          = Net::HTTP.const_get method.to_s.capitalize
           request               = method_class.new(uri.to_s, HTTP_HEADERS)
           request.form_data     = params if ['post', 'put'].include?(method)
           connect_and_send(request)
+        end
+
+        ##
+        # URI parse for params
+        def uri_parse(params, path)
+          request_path = "#{@config.host}/#{path}"
+          uri = URI.parse(request_path)
+          params[:access_token] = @token
+          uri
         end
 
         ##
