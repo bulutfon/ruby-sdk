@@ -64,7 +64,6 @@ module BulutfonSDK
       def set_up_connection # :doc:
         uri                = URI.parse(@config.host)
         @http              = Net::HTTP.new(uri.host, uri.port, p_user = @config.proxy_user, p_pass =  @config.proxy_pass)
-        @http.use_ssl      = true
         @http.verify_mode  = OpenSSL::SSL::VERIFY_NONE
         @http.use_ssl      = @config.use_ssl
         if @config.ssl_verify_peer
