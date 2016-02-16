@@ -214,3 +214,63 @@ params = {
 }
 puts message.create(params)
 
+##############################################
+# Create OpenStruct object from hash
+##############################################
+
+# Account
+# -------------------------------------------------------------
+bulutfon = BulutfonSDK::REST::Bulutfon.new(token)
+# Get account details
+puts bulutfon.details
+
+# Details result is like below
+=begin
+details = {
+    'user' =>{
+        'email' => 'test@bulutfon.com', 'name' => 'BULUTFON', 'gsm' => 'XXXXXXXXXXXX'
+    },
+    'pbx' =>{
+        'name' => 'test', 'url' => 'test.com', 'state' => 'CONFIRMED', 'package' => 'ENTERPRISE', 'customer_type' => 'CORPORATE'
+    },
+    'credit' =>{
+        'balance' => '10.00', 'sms_credit' => 0
+    }
+}
+=end
+
+# to_obj is our helper method for hashes
+detail_object = bulutfon.details.to_obj
+puts detail_object
+
+# Object Example
+=begin
+#<OpenStruct
+  user=#<OpenStruct email="test@bulutfon.com", name="BULUTFON", gsm="XXXXXXXXXXXX">,
+  pbx=#<OpenStruct name="test", url="test.com", state="CONFIRMED", package="ENTERPRISE", customer_type="CORPORATE">,
+  credit=#<OpenStruct balance="10.00", sms_credit=0>>
+=end
+
+# You can access fields
+puts detail_object.user.email
+puts detail_object.user.name
+puts detail_object.pbx.name
+puts detail_object.pbx.url
+puts detail_object.credit.balance
+puts detail_object.credit.sms_credit
+
+# Groups
+# -------------------------------------------------------------
+group_sdk   = BulutfonSDK::REST::Group.new(token)
+obj_result  = group_sdk.all.to_obj
+=begin
+#<OpenStruct
+  groups=[
+    #<OpenStruct id=1, number=11, name="Ofis - İstanbul", timeout=30>,
+    #<OpenStruct id=2, number=22, name="Ofis - Denizli", timeout=30>,
+    #<OpenStruct id=3, number=33, name="İngilizce", timeout=30>
+  ]>
+=end
+obj_result.groups.each do |group|
+  puts group.name
+end

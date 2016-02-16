@@ -11,6 +11,7 @@ require 'ostruct'
 require 'bulutfon_sdk/version' unless defined?(BulutfonSDK::VERSION)
 require 'bulutfon_sdk/util'
 require 'bulutfon_sdk/helpers/data_helper'
+require 'bulutfon_sdk/hash'
 require 'bulutfon_sdk/rest/bulutfon'
 require 'bulutfon_sdk/rest/message'
 require 'bulutfon_sdk/rest/did'
