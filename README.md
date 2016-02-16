@@ -313,7 +313,7 @@ puts detail_object.credit.balance
 puts detail_object.credit.sms_credit
 ```
 
-## Gruplar için örnek
+### Gruplar için örnek
 ```ruby
 group_sdk   = BulutfonSDK::REST::Group.new(token)
 obj_result  = group_sdk.all.to_obj
@@ -330,7 +330,7 @@ obj_result.groups.each do |group|
 end
 ```
 
-### Credits
+##Credits
 * ruby_sdk is maintained by [Lab2023](http://lab2023.com/) & [Bulutfon](https://www.bulutfon.com/)
 * Thank you to all the contributors!
 * The names and logos for Bulutfon are trademarks of Bulutfon
