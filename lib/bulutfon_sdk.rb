@@ -6,9 +6,12 @@ require 'openssl'
 require 'open3'
 require 'mime/types'
 require 'base64'
+require 'ostruct'
 
 require 'bulutfon_sdk/version' unless defined?(BulutfonSDK::VERSION)
 require 'bulutfon_sdk/util'
+require 'bulutfon_sdk/helpers/data_helper'
+require 'bulutfon_sdk/hash'
 require 'bulutfon_sdk/rest/bulutfon'
 require 'bulutfon_sdk/rest/message'
 require 'bulutfon_sdk/rest/did'
@@ -23,6 +26,8 @@ require 'bulutfon_sdk/rest/extension'
 require 'bulutfon_sdk/rest/message_title'
 require 'bulutfon_sdk/util/client_config'
 require 'bulutfon_sdk/rest/errors'
+
+include BulutfonSDK::Helpers::DataHelper
 
 module BulutfonSDK
   # Your code goes here...
