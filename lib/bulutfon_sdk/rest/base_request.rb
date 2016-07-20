@@ -10,9 +10,17 @@ module BulutfonSDK
 
       def initialize(*args)
         options = args.last.is_a?(Hash) ? args.pop : {}
+        args.select! {|arg| !arg.nil?}
         @config = BulutfonSDK::Util::ClientConfig.new options
-        @token = args[0] || nil
-        raise ArgumentError, 'Auth token is required' if @token.nil?
+        if args.count > 1
+          @email = args[0] || nil
+          @password = args[1] || nil
+          @auth_type = 'credentials'
+        else
+          @token = args[0] || nil
+          @auth_type = 'token'
+        end
+        raise ArgumentError, 'Auth token or user credentials are required' if (@token.nil? && (@email.nil? || @password.nil?))
         set_up_connection
       end
 
@@ -41,14 +49,25 @@ module BulutfonSDK
         def uri_parse(params, path)
           request_path = "#{@config.host}/#{path}"
           uri = URI.parse(request_path)
-          params[:access_token] = @token
+          encrypt_token = params.delete(:encrypt_token)
+          id = params.delete(:id)
+          if @auth_type == 'credentials'
+            params[:email] = @email
+            params[:password] = @password
+          else
+            if encrypt_token && id.present?
+              params[:access_token] = Digest::SHA1.hexdigest(@token.to_s + id.to_s)
+            else
+              params[:access_token] = @token
+            end
+          end
           uri
         end
 
         ##
         # Prepare http request for file saving
-        def save_file(method, path, save_path)
-          uri          = prepare_uri(path)
+        def save_file(method, path, save_path, params = {})
+          uri          = prepare_uri(path, params)
           method_class = Net::HTTP.const_get method.to_s.capitalize
           request      = method_class.new(uri.to_s, HTTP_HEADERS)
           response     = connect_and_send(request, is_file: true )
