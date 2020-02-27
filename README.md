@@ -5,6 +5,8 @@
 * [API Dokümantasyonu](https://github.com/bulutfon/documents/tree/master/API)
 * [Örnek Kodlar](https://github.com/bulutfon/ruby-sdk/tree/master/examples)
 
+# ÖNEMLİ: Bu SDK APIv1 uyumludur.
+
 ## Kullanım
 
 ### Kurulum
